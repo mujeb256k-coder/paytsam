@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <meta name="theme-color" content="#ffffff">
+  <title>Paytsam - UPI App</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="app-shell">
+    <header class="topbar">
+      <div class="brand">
+        <div class="brand-mark">P</div>
+        <div>
+          <div class="brand-name">Paytsam</div>
+          <div class="upi-label">UPI • Payments</div>
+        </div>
+      </div>
+      <div class="top-actions">
+        <button class="icon-btn" id="notificationBtn" aria-label="Notifications">♢<span class="dot"></span></button>
+        <button class="profile-mini" id="profileBtn">M</button>
+      </div>
+    </header>
+
+    <main id="appContent">
+      <section class="page active" id="homePage">
+        <div class="greeting">
+          <div>
+            <span class="muted">Welcome back</span>
+            <h1>Hi, User 👋</h1>
+          </div>
+          <button class="help-btn">Help</button>
+        </div>
+
+        <section class="upi-card">
+          <div class="upi-card-top">
+            <div>
+              <span class="small-label">UPI ID</span>
+              <strong id="upiId">mujeb@paytsam</strong>
+            </div>
+            <button class="copy-btn" id="copyUpi">Copy</button>
+          </div>
+          <div class="balance-row">
+            <div>
+              <span class="small-label">Paytsam Balance</span>
+              <div class="balance">₹<span id="balance">12,450.00</span></div>
+            </div>
+            <button class="eye-btn" id="toggleBalance">◉</button>
+          </div>
+          <div class="upi-card-bottom">
+            <span>● UPI Active</span>
+            <span>•••• 2486</span>
+          </div>
+        </section>
+
+        <section class="quick-grid">
+          <button class="quick-action" data-action="scan"><span class="qa-icon scan">▦</span><b>Scan & Pay</b><small>QR payment</small></button>
+          <button class="quick-action" data-action="send"><span class="qa-icon send">↗</span><b>Send Money</b><small>To UPI ID</small></button>
+          <button class="quick-action" data-action="bank"><span class="qa-icon bank">▤</span><b>Bank Transfer</b><small>Account / IFSC</small></button>
+          <button class="quick-action" data-action="request"><span class="qa-icon request">↓</span><b>Request Money</b><small>Collect payment</small></button>
+        </section>
+
+        <section class="section-head">
+          <h2>Recharge & Bills</h2><button class="see-all">See all</button>
+        </section>
+        <div class="service-grid">
+          <button class="service"><span>📱</span><b>Mobile</b></button>
+          <button class="service"><span>📡</span><b>DTH</b></button>
+          <button class="service"><span>💡</span><b>Electricity</b></button>
+          <button class="service"><span>🌐</span><b>Broadband</b></button>
+          <button class="service"><span>🏠</span><b>Rent</b></button>
+          <button class="service"><span>🚗</span><b>FASTag</b></button>
+        </div>
+
+        <section class="section-head">
+          <h2>Recent Transactions</h2><button class="see-all" data-page="historyPage">View all</button>
+        </section>
+        <div class="transaction-list" id="recentTransactions"></div>
+      </section>
+
+      <section class="page" id="scanPage">
+        <div class="page-title"><button class="back-btn" data-home>‹</button><div><h1>Scan & Pay</h1><p>Scan a UPI QR code</p></div></div>
+        <div class="scanner">
+          <div class="scanner-corners"></div>
+          <div class="scan-line"></div>
+          <div class="scan-symbol">▦</div>
+          <p>Point your camera at a QR code</p>
+        </div>
+        <div class="scan-actions">
+          <button class="outline-btn">▣ Gallery</button>
+          <button class="primary-btn" id="demoScan">Use Demo QR</button>
+        </div>
+        <div class="secure-note">🔒 Your payment is protected by UPI PIN.</div>
+      </section>
+
+      <section class="page" id="sendPage">
+        <div class="page-title"><button class="back-btn" data-home>‹</button><div><h1>Send Money</h1><p>Transfer using UPI</p></div></div>
+        <form class="payment-form" id="sendForm">
+          <label>UPI ID / Mobile number</label>
+          <input id="receiver" placeholder="example@upi" required>
+          <label>Amount</label>
+          <div class="amount-input"><span>₹</span><input id="sendAmount" type="number" min="1" placeholder="0" required></div>
+          <label>Message <span>(optional)</span></label>
+          <input id="message" placeholder="What's this payment for?">
+          <button class="primary-btn full" type="submit">Continue to Pay</button>
+        </form>
+      </section>
+
+      <section class="page" id="historyPage">
+        <div class="page-title"><div><h1>Transactions</h1><p>Your payment activity</p></div><button class="filter-btn">☷</button></div>
+        <div class="tabs"><button class="tab active">All</button><button class="tab">Sent</button><button class="tab">Received</button></div>
+        <div class="transaction-list large" id="allTransactions"></div>
+      </section>
+
+      <section class="page" id="profilePage">
+        <div class="page-title"><div><h1>Profile</h1><p>Manage your Paytsam account</p></div></div>
+        <div class="profile-card">
+          <div class="avatar">M</div>
+          <div><h2>Mujeb User</h2><p>mujeb@paytsam</p></div>
+          <button>✎</button>
+        </div>
+        <div class="settings-list">
+          <button>👤 <span>Personal details</span><b>›</b></button>
+          <button>🏦 <span>Bank accounts</span><b>›</b></button>
+          <button>🔐 <span>UPI & Security</span><b>›</b></button>
+          <button>🔔 <span>Notifications</span><b>›</b></button>
+          <button>❓ <span>Help & Support</span><b>›</b></button>
+          <button>⚙️ <span>Settings</span><b>›</b></button>
+        </div>
+      </section>
+    </main>
+
+    <nav class="bottom-nav">
+      <button class="nav-item active" data-page="homePage"><span>⌂</span><b>Home</b></button>
+      <button class="nav-item" data-page="scanPage"><span>▦</span><b>Scan</b></button>
+      <button class="nav-item pay-button" data-action="send"><span>₹</span></button>
+      <button class="nav-item" data-page="historyPage"><span>↔</span><b>History</b></button>
+      <button class="nav-item" data-page="profilePage"><span>○</span><b>Profile</b></button>
+    </nav>
+  </div>
+
+  <div class="modal" id="modal">
+    <div class="modal-box">
+      <button class="modal-close" id="modalClose">×</button>
+      <div id="modalContent"></div>
+    </div>
+  </div>
+  <script src="script.js"></script>
+</body>
+</html>
